@@ -2,34 +2,34 @@ document.addEventListener("DOMContentLoaded", function () {
   // --- TRANSLATION DATA ---
   const translations = {
     vi: {
-      doc_title: "John Doe - Lập Trình Viên & Nhà Phát Triển Web",
+      doc_title: "Tấn Hà - Lập Trình Viên & Nhà Phát Triển Web",
       nav_about: "Giới thiệu",
       nav_skills: "Kỹ năng",
       nav_projects: "Dự án",
       nav_contact: "Liên hệ",
       hero_subtitle:
-        "Lập trình viên Full-stack chuyên xây dựng các ứng dụng web hiệu suất cao.",
+        "Frontend Developer | Angular | React | JavaScript | TypeScript",
       contact_info_address: "TP. Hồ Chí Minh, Việt Nam",
       about_title: 'Về <span class="text-gradient">Bản Thân</span>',
       about_p1:
-        "Xin chào! Tôi là John Doe, một lập trình viên đam mê biến những ý tưởng phức tạp thành các giải pháp web thanh lịch và hiệu quả. Với kinh nghiệm trong cả front-end và back-end, tôi luôn khao khát học hỏi công nghệ mới và đóng góp cho các dự án có ý nghĩa.",
+        "Xin chào! Tôi là Tấn Hà, một Lập trình viên Front-end với hơn 3+ năm kinh nghiệm xây dựng ứng dụng web động và thân thiện với người dùng, bao gồm ứng dụng một trang. Thành thạo HTML, CSS và JavaScript, có nền tảng vững chắc về các framework phổ biến như React, Angular và Vue.js. Kinh nghiệm với TypeScript để nâng cao chất lượng và khả năng bảo trì mã. Có kinh nghiệm làm việc với nền tảng low-code (Unqork). Đã chứng minh khả năng cung cấp thiết kế đáp ứng hiệu suất cao cho các web quản trị cho admin, quảng cáo trực tuyến và tài chính. Mong muốn đóng góp chuyên môn về framework JavaScript và low-code để tạo ra trải nghiệm người dùng hấp dẫn và hiệu quả.",
       about_p2:
         "Mục tiêu của tôi là sử dụng kỹ năng của mình để tạo ra những sản phẩm không chỉ tốt về mặt kỹ thuật mà còn mang lại trải nghiệm tuyệt vời cho người dùng.",
       skills_title: 'Bộ <span class="text-gradient">Kỹ Năng</span>',
       projects_title: 'Dự Án <span class="text-gradient">Nổi Bật</span>',
-      project1_title: "Sàn Thương Mại Điện Tử",
+      project1_title: "LightX",
       project1_desc:
-        "Một trang web e-commerce đầy đủ chức năng xây dựng bằng MERN stack, hỗ trợ tìm kiếm sản phẩm, giỏ hàng và thanh toán qua Stripe.",
+        "LightX tập trung vào việc cung cấp giải pháp quản lý và kiểm soát chiến dịch quảng cáo ngoài trời theo thời gian thực, tận dụng luồng dữ liệu để tối ưu hóa tính linh hoạt và hiệu quả của chiến dịch.",
       project_live_demo: "Live Demo",
-      project2_title: "Ứng Dụng Quản Lý Công Việc",
+      project2_title: "Freekick",
       project2_desc:
-        "Ứng dụng quản lý công việc đáp ứng nhanh, xây dựng bằng React và Firebase, giúp người dùng sắp xếp công việc hàng ngày một cách trực quan.",
-      project3_title: "Trang Blog Cá Nhân",
+        "FreeKick (thuộc Credit Strong và Austin Capital Bank) là một sản phẩm tài chính “set‑it‑and‑forget‑it” được thiết kế nhằm giúp phụ huynh xây dựng lịch sử tín dụng cho con từ sớm, đồng thời bảo vệ danh tính cả gia đình",
+      project3_title: "BoatBites",
       project3_desc:
-        "Một blog cá nhân được xây dựng bằng Next.js và Markdown, tối ưu hóa cho SEO và tốc độ tải trang.",
-      project4_title: "API Dịch Vụ Thời Tiết",
+        "BoatBites (BoatBites.app) là một ứng dụng di động chuyên cung cấp dịch vụ giao đồ ăn và nhu yếu phẩm trực tiếp đến tàu xuồng ngoài biển/lagoons/sandbars—không cần cập bến—với khẩu hiệu “Anchor. Order. Enjoy.”",
+      project4_title: "Personal Appraisal",
       project4_desc:
-        "Một RESTful API được xây dựng bằng Python (FastAPI) cung cấp dữ liệu thời tiết thời gian thực từ các nguồn bên ngoài.",
+        "Ứng dụng đánh giá cá nhân (Personal Appraisal) là một ứng dụng web giúp người dùng theo dõi và đánh giá hiệu suất công việc của mình, cung cấp các báo cáo và phân tích để cải thiện hiệu suất.",
       contact_title: 'Liên Hệ <span class="text-gradient">Với Tôi</span>',
       contact_subtitle:
         "Nếu bạn có một dự án hoặc một cơ hội, đừng ngần ngại gửi tin nhắn cho tôi.",
@@ -44,34 +44,34 @@ document.addEventListener("DOMContentLoaded", function () {
       footer_rights: "Mọi quyền được bảo lưu.",
     },
     en: {
-      doc_title: "John Doe - Coder & Web Developer",
+      doc_title: "Tấn Hà - Coder & Web Developer",
       nav_about: "About",
       nav_skills: "Skills",
       nav_projects: "Projects",
       nav_contact: "Contact",
       hero_subtitle:
-        "Full-stack developer specializing in building high-performance web applications.",
+        "Frontend Developer | Angular | React | JavaScript | TypeScript",
       contact_info_address: "Ho Chi Minh City, Vietnam",
       about_title: 'About <span class="text-gradient">Me</span>',
       about_p1:
-        "Hello! I'm John Doe, a passionate developer dedicated to turning complex ideas into elegant and efficient web solutions. With experience in both front-end and back-end, I'm always eager to learn new technologies and contribute to meaningful projects.",
+        "Hello! I'm Ha, Front-end developer with over  3+ years of experience building dynamic and user-friendly web applications, including single-page applications. Proficient in HTML, CSS, and JavaScript, with a strong foundation in popular frameworks like React, Angular, and Vue.js. Experienced with TypeScript for enhanced code quality and maintainability. Skilled in working with low-code platforms (Unqork). Proven ability to deliver high-performance, responsive designs for admin management websites, online advertising, and finance. Eager to contribute expertise in JavaScript frameworks and low-code to create engaging and impactful user experiences.",
       about_p2:
         "My goal is to use my skills to create products that are not only technically sound but also provide a great user experience.",
       skills_title: 'My <span class="text-gradient">Skillset</span>',
       projects_title: 'Featured <span class="text-gradient">Projects</span>',
-      project1_title: "E-commerce Platform",
+      project1_title: "LightX",
       project1_desc:
-        "A full-featured e-commerce website built with the MERN stack, supporting product search, shopping cart, and Stripe payment integration.",
+        "LightX focuses on providing real-time management and control solutions for outdoor advertising campaigns, leveraging data streams to optimize campaign flexibility and effectiveness.",
       project_live_demo: "Live Demo",
-      project2_title: "Task Management App",
+      project2_title: "Freekick",
       project2_desc:
-        "A responsive task management application built with React and Firebase, helping users organize their daily tasks intuitively.",
-      project3_title: "Personal Blog Site",
+        "FreeKick (part of Credit Strong and Austin Capital Bank) is a set-it-and-forget-it financial product designed to help parents build credit history for their children early on, while protecting the identity of the entire family.",
+      project3_title: "BoatBites",
       project3_desc:
-        "A personal blog built with Next.js and Markdown, optimized for SEO and loading speed.",
-      project4_title: "Weather Service API",
+        "BoatBites (BoatBites.app) is a mobile app specializing in delivering food and essential supplies directly to boats offshore/lagoons/sandbars—no docking required—with the slogan “Anchor. Order. Enjoy.”",
+      project4_title: "Personal Appraisal",
       project4_desc:
-        "A RESTful API built with Python (FastAPI) that provides real-time weather data from external sources.",
+        "Personal Appraisal is a web application that helps users track and evaluate their work performance, providing reports and analytics to improve performance.",
       contact_title: 'Get In <span class="text-gradient">Touch</span>',
       contact_subtitle:
         "If you have a project or an opportunity, don't hesitate to send me a message.",
@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   const langSwitchers = document.querySelectorAll(".lang-option");
-  let currentLang = localStorage.getItem("language") || "vi";
+  let currentLang = localStorage.getItem("language") || "en";
 
   function setLanguage(lang) {
     if (!translations[lang]) return;
@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const typingTextElement = document.getElementById("typing-text");
   typingTextElement.textContent = "";
-  const textToType = "John Doe";
+  const textToType = "Tấn Hà";
   let charIndex = 0;
   function type() {
     if (charIndex < textToType.length) {

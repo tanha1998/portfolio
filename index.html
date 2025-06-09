@@ -1,31 +1,38 @@
 <!DOCTYPE html>
 <html lang="vi" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-lang-key="doc_title">John Doe - Lập Trình Viên & Nhà Phát Triển Web</title>
+    <title data-lang-key="doc_title">Tấn Hà - Lập Trình Viên & Nhà Phát Triển Web</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <!-- EmailJS SDK -->
-     <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="script.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 </head>
+
 <body class="antialiased">
 
     <!-- Header & Navigation -->
     <header class="bg-gray-900/70 backdrop-blur-sm fixed w-full z-50 top-0 border-b border-gray-700">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-gradient">JD</a>
+            <a href="#" class="text-2xl font-bold text-gradient">Frontend Developer</a>
             <div class="hidden md:flex items-center space-x-8">
-                <a href="#about" class="text-gray-300 hover:text-blue-400 transition-colors" data-lang-key="nav_about">Giới thiệu</a>
-                <a href="#skills" class="text-gray-300 hover:text-blue-400 transition-colors" data-lang-key="nav_skills">Kỹ năng</a>
-                <a href="#projects" class="text-gray-300 hover:text-blue-400 transition-colors" data-lang-key="nav_projects">Dự án</a>
-                <a href="#contact" class="text-gray-300 hover:text-blue-400 transition-colors" data-lang-key="nav_contact">Liên hệ</a>
-                 <!-- Language Switcher -->
-                <div id="lang-switcher" class="flex items-center text-gray-300 border-l border-gray-600 ml-6 pl-6 space-x-4 text-sm">
+                <a href="#about" class="text-gray-300 hover:text-blue-400 transition-colors"
+                    data-lang-key="nav_about">Giới thiệu</a>
+                <a href="#skills" class="text-gray-300 hover:text-blue-400 transition-colors"
+                    data-lang-key="nav_skills">Kỹ năng</a>
+                <a href="#projects" class="text-gray-300 hover:text-blue-400 transition-colors"
+                    data-lang-key="nav_projects">Dự án</a>
+                <a href="#contact" class="text-gray-300 hover:text-blue-400 transition-colors"
+                    data-lang-key="nav_contact">Liên hệ</a>
+                <!-- Language Switcher -->
+                <div id="lang-switcher"
+                    class="flex items-center text-gray-300 border-l border-gray-600 ml-6 pl-6 space-x-4 text-sm">
                     <button class="lang-option active" data-lang="vi">VN</button>
                     <span class="text-gray-600">|</span>
                     <button class="lang-option hover:text-white" data-lang="en">EN</button>
@@ -37,15 +44,19 @@
         </nav>
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-gray-900/90">
-            <a href="#about" class="block py-3 px-6 text-sm text-gray-300 hover:bg-gray-700" data-lang-key="nav_about">Giới thiệu</a>
-            <a href="#skills" class="block py-3 px-6 text-sm text-gray-300 hover:bg-gray-700" data-lang-key="nav_skills">Kỹ năng</a>
-            <a href="#projects" class="block py-3 px-6 text-sm text-gray-300 hover:bg-gray-700" data-lang-key="nav_projects">Dự án</a>
-            <a href="#contact" class="block py-3 px-6 text-sm text-gray-300 hover:bg-gray-700" data-lang-key="nav_contact">Liên hệ</a>
-             <!-- Language Switcher Mobile -->
+            <a href="#about" class="block py-3 px-6 text-sm text-gray-300 hover:bg-gray-700"
+                data-lang-key="nav_about">Giới thiệu</a>
+            <a href="#skills" class="block py-3 px-6 text-sm text-gray-300 hover:bg-gray-700"
+                data-lang-key="nav_skills">Kỹ năng</a>
+            <a href="#projects" class="block py-3 px-6 text-sm text-gray-300 hover:bg-gray-700"
+                data-lang-key="nav_projects">Dự án</a>
+            <a href="#contact" class="block py-3 px-6 text-sm text-gray-300 hover:bg-gray-700"
+                data-lang-key="nav_contact">Liên hệ</a>
+            <!-- Language Switcher Mobile -->
             <div class="flex justify-center items-center space-x-4 py-4 border-t border-gray-700">
-                 <button class="lang-option text-gray-300" data-lang="vi">Tiếng Việt</button>
-                 <span class="text-gray-600">|</span>
-                 <button class="lang-option text-gray-300 hover:text-white" data-lang="en">English</button>
+                <button class="lang-option text-gray-300" data-lang="vi">Tiếng Việt</button>
+                <span class="text-gray-600">|</span>
+                <button class="lang-option text-gray-300 hover:text-white" data-lang="en">English</button>
             </div>
         </div>
     </header>
@@ -54,9 +65,10 @@
 
         <!-- Hero Section -->
         <section id="home" class="text-center min-h-[60vh] flex flex-col justify-center items-center">
-            <img src="https://placehold.co/128x128/1F2937/E5E7EB?text=JD" alt="John Doe Portrait" class="rounded-full shadow-2xl w-32 h-32 mb-6 border-4 border-gray-700">
-            <h1 class="text-4xl md:text-6xl font-extrabold mb-3">
-                <span id="typing-text">John Doe</span><span class="typing-cursor"></span>
+            <img src="./assets/image/it's-me.png" alt="John Doe Portrait"
+                class="rounded-full shadow-2xl w-52 h-52 mb-6 border-4 border-gray-700 portrait-focus">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-3 text-gradient">
+                <span id="typing-text">Tấn Hà</span><span class="typing-cursor"></span>
             </h1>
             <p class="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto" data-lang-key="hero_subtitle">
                 Lập trình viên Full-stack chuyên xây dựng các ứng dụng web hiệu suất cao.
@@ -66,18 +78,21 @@
         <!-- Contact Info Bar -->
         <section class="pb-20 animate-on-scroll">
             <div class="card rounded-lg p-6 max-w-4xl mx-auto">
-                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
                     <div class="flex items-center justify-center md:justify-start space-x-3">
                         <i class="fas fa-envelope text-blue-400 text-xl"></i>
-                        <a href="mailto:john.doe@email.com" class="text-gray-300 hover:text-blue-400" data-lang-key="contact_info_email">john.doe@email.com</a>
+                        <a href="mailto:hanguyen.software@gmail.com" class="text-gray-300 hover:text-blue-400"
+                            data-lang-key="contact_info_email">hanguyen.software@gmail.com</a>
                     </div>
                     <div class="flex items-center justify-center space-x-3">
                         <i class="fas fa-phone-alt text-blue-400 text-xl"></i>
-                        <a href="tel:+84123456789" class="text-gray-300 hover:text-blue-400" data-lang-key="contact_info_phone">(+84) 123 456 789</a>
+                        <a href="tel:+84965459940" class="text-gray-300 hover:text-blue-400"
+                            data-lang-key="contact_info_phone">(+84) 965459940</a>
                     </div>
                     <div class="flex items-center justify-center md:justify-end space-x-3">
                         <i class="fas fa-map-marker-alt text-blue-400 text-xl"></i>
-                        <span class="text-gray-300" data-lang-key="contact_info_address">TP. Hồ Chí Minh, Việt Nam</span>
+                        <span class="text-gray-300" data-lang-key="contact_info_address">TP. Hồ Chí Minh, Việt
+                            Nam</span>
                     </div>
                 </div>
             </div>
@@ -85,65 +100,120 @@
 
         <!-- About Section -->
         <section id="about" class="py-20 animate-on-scroll">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-lang-key="about_title">Về <span class="text-gradient">Bản Thân</span></h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-lang-key="about_title">Về <span
+                    class="text-gradient">Bản Thân</span></h2>
             <div class="card rounded-lg p-8 max-w-4xl mx-auto text-lg text-gray-300 space-y-4 text-center">
-                <p data-lang-key="about_p1">Xin chào! Tôi là John Doe, một lập trình viên đam mê biến những ý tưởng phức tạp thành các giải pháp web thanh lịch và hiệu quả. Với kinh nghiệm trong cả front-end và back-end, tôi luôn khao khát học hỏi công nghệ mới và đóng góp cho các dự án có ý nghĩa.</p>
-                <p data-lang-key="about_p2">Mục tiêu của tôi là sử dụng kỹ năng của mình để tạo ra những sản phẩm không chỉ tốt về mặt kỹ thuật mà còn mang lại trải nghiệm tuyệt vời cho người dùng.</p>
+                <p data-lang-key="about_p1">Xin chào! Tôi là John Doe, một lập trình viên đam mê biến những ý tưởng phức
+                    tạp thành các giải pháp web thanh lịch và hiệu quả. Với kinh nghiệm trong cả front-end và back-end,
+                    tôi luôn khao khát học hỏi công nghệ mới và đóng góp cho các dự án có ý nghĩa.</p>
+                <p data-lang-key="about_p2">Mục tiêu của tôi là sử dụng kỹ năng của mình để tạo ra những sản phẩm không
+                    chỉ tốt về mặt kỹ thuật mà còn mang lại trải nghiệm tuyệt vời cho người dùng.</p>
             </div>
         </section>
 
         <!-- Skills Section -->
         <section id="skills" class="py-20 animate-on-scroll">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-lang-key="skills_title">Bộ <span class="text-gradient">Kỹ Năng</span></h2>
-            <div class="max-w-4xl mx-auto grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-6 text-center">
-                <!-- Skill Items -->
-                <div class="flex flex-col items-center p-4 card rounded-lg"><i class="fab fa-js-square text-5xl text-yellow-400 mb-2"></i><span class="font-semibold">JavaScript</span></div>
-                <div class="flex flex-col items-center p-4 card rounded-lg"><i class="fab fa-react text-5xl text-cyan-400 mb-2"></i><span class="font-semibold">React</span></div>
-                <div class="flex flex-col items-center p-4 card rounded-lg"><i class="fab fa-node-js text-5xl text-green-500 mb-2"></i><span class="font-semibold">Node.js</span></div>
-                <div class="flex flex-col items-center p-4 card rounded-lg"><i class="fab fa-python text-5xl text-blue-400 mb-2"></i><span class="font-semibold">Python</span></div>
-                <div class="flex flex-col items-center p-4 card rounded-lg"><i class="fas fa-database text-5xl text-purple-400 mb-2"></i><span class="font-semibold">SQL</span></div>
-                <div class="flex flex-col items-center p-4 card rounded-lg"><svg class="w-12 h-12 mb-2 text-green-400" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>MongoDB</title><path fill="currentColor" d="M12,0A12,12,0,0,0,0,12a11.85,11.85,0,0,0,5.91,10.13,12.1,12.1,0,0,0,4.28-1.57A11.94,11.94,0,0,0,12,24a12,12,0,0,0,12-12A12,12,0,0,0,12,0ZM13,18.45A4.47,4.47,0,0,1,12,17.6a4.2,4.2,0,0,1-1-.15V11.2a12.83,12.83,0,0,0,1,.08,10.48,10.48,0,0,0,1.2-.09c.33.62.67,1.25,1,1.88A4.4,4.4,0,0,1,13,18.45Zm1.69-6.19a8.61,8.61,0,0,1-1.38-2.45,11.41,11.41,0,0,1-1.31,2.45V6.75A4.4,4.4,0,0,1,13,5.55a4.47,4.47,0,0,1,1,.85,4.2,4.2,0,0,1,.15,1Z"/></svg><span class="font-semibold">NoSQL</span></div>
-                <div class="flex flex-col items-center p-4 card rounded-lg"><i class="fab fa-html5 text-5xl text-orange-500 mb-2"></i><span class="font-semibold">HTML5</span></div>
-                <div class="flex flex-col items-center p-4 card rounded-lg"><i class="fab fa-css3-alt text-5xl text-blue-500 mb-2"></i><span class="font-semibold">CSS3</span></div>
-                <div class="flex flex-col items-center p-4 card rounded-lg"><svg class="w-12 h-12 mb-2 text-white" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Tailwind CSS</title><path fill="currentColor" d="M12.001,4.8c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624 C13.666,10.618,15.027,12,18.001,12c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C16.334,6.182,14.973,4.8,12.001,4.8z M6.001,12c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624 c1.177,1.194,2.538,2.576,5.512,2.576c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C10.334,13.382,8.973,12,6.001,12z"/></svg><span class="font-semibold">Tailwind</span></div>
-                <div class="flex flex-col items-center p-4 card rounded-lg"><i class="fab fa-git-alt text-5xl text-red-500 mb-2"></i><span class="font-semibold">Git</span></div>
-                <div class="flex flex-col items-center p-4 card rounded-lg"><i class="fab fa-docker text-5xl text-blue-600 mb-2"></i><span class="font-semibold">Docker</span></div>
-                 <div class="flex flex-col items-center p-4 card rounded-lg"><i class="fab fa-figma text-5xl text-purple-500 mb-2"></i><span class="font-semibold">Figma</span></div>
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-lang-key="skills_title">Bộ <span
+                    class="text-gradient">Kỹ Năng</span></h2>
+            <div
+                class="max-w-5xl mx-auto grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-6 text-center">
+
+                <div class="flex flex-col items-center p-4 card rounded-lg">
+                    <svg class="skill-icon text-blue-400 mb-2 h-12 w-12" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 48 48">
+                        <rect width="36" height="36" x="6" y="6" fill="#1976d2" />
+                        <polygon fill="#fff"
+                            points="27.49,22 14.227,22 14.227,25.264 18.984,25.264 18.984,40 22.753,40 22.753,25.264 27.49,25.264" />
+                        <path fill="#fff"
+                            d="M39.194,26.084c0,0-1.787-1.192-3.807-1.192s-2.747,0.96-2.747,1.986 c0,2.648,7.381,2.383,7.381,7.712c0,8.209-11.254,4.568-11.254,4.568V35.22c0,0,2.152,1.622,4.733,1.622s2.483-1.688,2.483-1.92 c0-2.449-7.315-2.449-7.315-7.878c0-7.381,10.658-4.469,10.658-4.469L39.194,26.084z" />
+                    </svg>
+                    <span class="font-semibold">TypeScript</span>
+                </div>
+                <div class="flex flex-col items-center p-4 card rounded-lg"><i
+                        class="fab fa-react text-5xl text-cyan-400 mb-2"></i><span class="font-semibold">React.js</span>
+                </div>
+                <div class="flex flex-col items-center p-4 card rounded-lg"><i
+                        class="fab fa-vuejs text-5xl text-green-500 mb-2"></i><span class="font-semibold">Vue.js</span>
+                </div>
+                <div class="flex flex-col items-center p-4 card rounded-lg"><i
+                        class="fab fa-angular text-5xl text-red-600 mb-2"></i><span class="font-semibold">Angular</span>
+                </div>
+                <div class="flex flex-col items-center p-4 card rounded-lg"><i
+                        class="fab fa-js-square text-5xl text-yellow-400 mb-2"></i><span
+                        class="font-semibold">JavaScript</span>
+                </div>
+                <div class="flex flex-col items-center p-4 card rounded-lg"><i
+                        class="fab fa-html5 text-5xl text-orange-500 mb-2"></i><span class="font-semibold">HTML5</span>
+                </div>
+                <div class="flex flex-col items-center p-4 card rounded-lg"><i
+                        class="fab fa-css3-alt text-5xl text-blue-500 mb-2"></i><span class="font-semibold">CSS3</span>
+                </div>
+                <div class="flex flex-col items-center p-4 card rounded-lg">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        aria-label="Unqork Icon">
+                        <circle cx="24" cy="24" r="22" fill="#0c2440" />
+                        <text x="24" y="32" text-anchor="middle" font-size="24" font-family="Inter, Arial, sans-serif"
+                            fill="#fff" font-weight="bold">U</text>
+                    </svg>
+                    <span class="font-semibold text-center">Unqork</span>
+                </div>
+                <div class="flex flex-col items-center p-4 card rounded-lg"><i
+                        class="fab fa-git-alt text-5xl text-red-500 mb-2"></i><span class="font-semibold">Git</span>
+                </div>
+                <div class="flex flex-col items-center p-4 card rounded-lg"><i
+                        class="fab fa-figma text-5xl text-purple-500 mb-2"></i><span class="font-semibold">Figma</span>
+                </div>
+                <div class="flex flex-col items-center p-4 card rounded-lg"><i
+                        class="fas fa-mobile-alt text-5xl text-indigo-400 mb-2"></i><span
+                        class="font-semibold text-center">Responsive Design</span></div>
+                <div class="flex flex-col items-center p-4 card rounded-lg"><i
+                        class="fas fa-sync-alt text-5xl text-teal-400 mb-2"></i><span
+                        class="font-semibold text-center">Agile
+                        Development</span></div>
             </div>
         </section>
 
         <!-- Projects Section -->
         <section id="projects" class="py-20 animate-on-scroll">
             <div class="flex justify-between items-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-left" data-lang-key="projects_title">Dự Án <span class="text-gradient">Nổi Bật</span></h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-left" data-lang-key="projects_title">Dự Án <span
+                        class="text-gradient">Nổi Bật</span></h2>
                 <div class="flex space-x-2">
-                    <button id="scroll-left-btn" class="bg-gray-700/50 hover:bg-gray-600 text-white rounded-full w-10 h-10 flex items-center justify-center transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                    <button id="scroll-left-btn"
+                        class="bg-gray-700/50 hover:bg-gray-600 text-white rounded-full w-10 h-10 flex items-center justify-center transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
                         <i class="fas fa-chevron-left"></i>
                     </button>
-                    <button id="scroll-right-btn" class="bg-gray-700/50 hover:bg-gray-600 text-white rounded-full w-10 h-10 flex items-center justify-center transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                    <button id="scroll-right-btn"
+                        class="bg-gray-700/50 hover:bg-gray-600 text-white rounded-full w-10 h-10 flex items-center justify-center transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
                         <i class="fas fa-chevron-right"></i>
                     </button>
                 </div>
             </div>
-            
-            <div id="project-scroll-container" class="project-scroll-container flex overflow-x-auto snap-x snap-mandatory gap-8 pb-8">
-                
+
+            <div id="project-scroll-container"
+                class="project-scroll-container flex overflow-x-auto snap-x snap-mandatory gap-8 pb-8">
+
                 <!-- Project Card 1 -->
                 <div class="snap-start flex-shrink-0 w-full md:w-[calc(50%-1rem)]">
                     <div class="card rounded-lg overflow-hidden h-full flex flex-col">
-                        <img src="https://placehold.co/600x350/3B82F6/FFFFFF?text=Project+One" onerror="this.onerror=null;this.src='https://placehold.co/600x350';" alt="Project 1" class="w-full h-auto object-cover">
+                        <img src="./assets/image/light-x.png"alt="Project 1"
+                            class="w-full h-auto object-cover">
                         <div class="p-6 flex flex-col flex-grow">
-                            <h3 class="text-xl font-bold mb-3 text-white" data-lang-key="project1_title">Sàn Thương Mại Điện Tử</h3>
-                            <p class="text-gray-400 mb-4 text-sm flex-grow" data-lang-key="project1_desc">Một trang web e-commerce đầy đủ chức năng xây dựng bằng MERN stack, hỗ trợ tìm kiếm sản phẩm, giỏ hàng và thanh toán qua Stripe.</p>
+                            <h3 class="text-xl font-bold mb-3 text-white" data-lang-key="project1_title">LightX</h3>
+                            <p class="text-gray-400 mb-4 text-sm flex-grow" data-lang-key="project1_desc">LightX tập trung vào việc cung cấp những giải pháp quản lý và điều khiển chiến dịch quảng cáo ngoài trời theo thời gian
+                            thực (real-time), dựa trên luồng dữ liệu để tối ưu tính linh hoạt và hiệu quả của chiến dịch .</p>
                             <div class="mb-4 flex flex-wrap gap-2">
-                                <span class="bg-blue-900/50 text-blue-300 text-xs font-semibold px-2.5 py-1 rounded-full">React</span>
-                                <span class="bg-green-900/50 text-green-300 text-xs font-semibold px-2.5 py-1 rounded-full">Node.js</span>
-                                <span class="bg-yellow-900/50 text-yellow-300 text-xs font-semibold px-2.5 py-1 rounded-full">Express</span>
-                                <span class="bg-purple-900/50 text-purple-300 text-xs font-semibold px-2.5 py-1 rounded-full">MongoDB</span>
+                                <span
+                                    class="bg-blue-900/50 text-blue-300 text-xs font-semibold px-2.5 py-1 rounded-full">Vuejs</span>
+                                <span
+                                    class="bg-green-900/50 text-green-300 text-xs font-semibold px-2.5 py-1 rounded-full">HTML</span>
+                                <span
+                                    class="bg-yellow-900/50 text-yellow-300 text-xs font-semibold px-2.5 py-1 rounded-full">SCSS</span>
+                                <span
+                                    class="bg-purple-900/50 text-purple-300 text-xs font-semibold px-2.5 py-1 rounded-full">PrimeVue</span>
+                                    <span class="bg-orange-900/50 text-orange-300 text-xs font-semibold px-2.5 py-1 rounded-full">JavaScript</span>
                             </div>
-                            <div class="mt-auto">
-                                <a href="#" target="_blank" class="block text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors" data-lang-key="project_live_demo">Live Demo</a>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -151,56 +221,69 @@
                 <!-- Project Card 2 -->
                 <div class="snap-start flex-shrink-0 w-full md:w-[calc(50%-1rem)]">
                     <div class="card rounded-lg overflow-hidden h-full flex flex-col">
-                        <img src="https://placehold.co/600x350/8B5CF6/FFFFFF?text=Project+Two" onerror="this.onerror=null;this.src='https://placehold.co/600x350';" alt="Project 2" class="w-full h-auto object-cover">
+                        <img src="./assets/image/freekick.png"
+                            onerror="this.onerror=null;this.src='https://placehold.co/600x350';" alt="Project 2"
+                            class="w-full h-auto object-cover">
                         <div class="p-6 flex flex-col flex-grow">
-                            <h3 class="text-xl font-bold mb-3 text-white" data-lang-key="project2_title">Ứng Dụng Quản Lý Công Việc</h3>
-                            <p class="text-gray-400 mb-4 text-sm flex-grow" data-lang-key="project2_desc">Ứng dụng quản lý công việc đáp ứng nhanh, xây dựng bằng React và Firebase, giúp người dùng sắp xếp công việc hàng ngày một cách trực quan.</p>
+                            <h3 class="text-xl font-bold mb-3 text-white" data-lang-key="project2_title">Freekick</h3>
+                            <p class="text-gray-400 mb-4 text-sm flex-grow" data-lang-key="project2_desc">FreeKick (thuộc Credit Strong và Austin Capital Bank) là một sản phẩm tài chính “set‑it‑and‑forget‑it” được thiết kế
+                            nhằm giúp phụ huynh xây dựng lịch sử tín dụng cho con từ sớm, đồng thời bảo vệ danh tính cả gia đình</p>
                             <div class="mb-4 flex flex-wrap gap-2">
-                                <span class="bg-blue-900/50 text-blue-300 text-xs font-semibold px-2.5 py-1 rounded-full">React</span>
-                                <span class="bg-red-900/50 text-red-300 text-xs font-semibold px-2.5 py-1 rounded-full">Firebase</span>
-                                <span class="bg-indigo-900/50 text-indigo-300 text-xs font-semibold px-2.5 py-1 rounded-full">Tailwind CSS</span>
+                                <span
+                                    class="bg-blue-900/50 text-blue-300 text-xs font-semibold px-2.5 py-1 rounded-full">Angular</span>
+                                <span
+                                    class="bg-red-900/50 text-red-300 text-xs font-semibold px-2.5 py-1 rounded-full">PrimeNg</span>
+                                <span
+                                    class="bg-indigo-900/50 text-indigo-300 text-xs font-semibold px-2.5 py-1 rounded-full">PrimeFlex</span>
+                                <span
+                                    class="bg-gray-700/50 text-gray-300 text-xs font-semibold px-2.5 py-1 rounded-full">Unqork</span>
                             </div>
-                            <div class="mt-auto">
-                                <a href="#" target="_blank" class="block text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors" data-lang-key="project_live_demo">Live Demo</a>
-                            </div>
+
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Project Card 3 -->
                 <div class="snap-start flex-shrink-0 w-full md:w-[calc(50%-1rem)]">
                     <div class="card rounded-lg overflow-hidden h-full flex flex-col">
-                        <img src="https://placehold.co/600x350/10B981/FFFFFF?text=Project+Three" onerror="this.onerror=null;this.src='https://placehold.co/600x350';" alt="Project 3" class="w-full h-auto object-cover">
+                        <img src="./assets/image/boatsbite.png"
+                             alt="Project 3"
+                            class="w-full h-auto object-cover">
                         <div class="p-6 flex flex-col flex-grow">
-                            <h3 class="text-xl font-bold mb-3 text-white" data-lang-key="project3_title">Trang Blog Cá Nhân</h3>
-                            <p class="text-gray-400 mb-4 text-sm flex-grow" data-lang-key="project3_desc">Một blog cá nhân được xây dựng bằng Next.js và Markdown, tối ưu hóa cho SEO và tốc độ tải trang.</p>
+                            <h3 class="text-xl font-bold mb-3 text-white" data-lang-key="project3_title">Boatbites</h3>
+                            <p class="text-gray-400 mb-4 text-sm flex-grow" data-lang-key="project3_desc">BoatBites (BoatBites.app) là một ứng dụng di động chuyên cung cấp dịch vụ giao đồ ăn và nhu yếu phẩm trực tiếp đến tàu
+                            xuồng ngoài biển/lagoons/sandbars—không cần cập bến—với khẩu hiệu “Anchor. Order. Enjoy.”,</p>
                             <div class="mb-4 flex flex-wrap gap-2">
-                                <span class="bg-gray-700/50 text-gray-300 text-xs font-semibold px-2.5 py-1 rounded-full">Next.js</span>
-                                <span class="bg-blue-900/50 text-blue-300 text-xs font-semibold px-2.5 py-1 rounded-full">React</span>
-                                <span class="bg-indigo-900/50 text-indigo-300 text-xs font-semibold px-2.5 py-1 rounded-full">Tailwind CSS</span>
-                            </div>
-                            <div class="mt-auto">
-                                <a href="#" target="_blank" class="block text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors" data-lang-key="project_live_demo">Live Demo</a>
+                                <span
+                                    class="bg-gray-700/50 text-gray-300 text-xs font-semibold px-2.5 py-1 rounded-full">ReactJs</span>
+                                <span
+                                    class="bg-blue-900/50 text-blue-300 text-xs font-semibold px-2.5 py-1 rounded-full">Material UI</span>
+                                <span
+                                    class="bg-indigo-900/50 text-indigo-300 text-xs font-semibold px-2.5 py-1 rounded-full">TypeScript</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Project Card 4 -->
                 <div class="snap-start flex-shrink-0 w-full md:w-[calc(50%-1rem)]">
                     <div class="card rounded-lg overflow-hidden h-full flex flex-col">
-                        <img src="https://placehold.co/600x350/F59E0B/FFFFFF?text=Project+Four" onerror="this.onerror=null;this.src='https://placehold.co/600x350';" alt="Project 4" class="w-full h-auto object-cover">
+                        <img src="./assets/image/pa.png"
+                            onerror="this.onerror=null;this.src='https://placehold.co/600x350';" alt="Project 4"
+                            class="w-full h-auto object-cover">
                         <div class="p-6 flex flex-col flex-grow">
-                            <h3 class="text-xl font-bold mb-3 text-white" data-lang-key="project4_title">API Dịch Vụ Thời Tiết</h3>
-                            <p class="text-gray-400 mb-4 text-sm flex-grow" data-lang-key="project4_desc">Một RESTful API được xây dựng bằng Python (FastAPI) cung cấp dữ liệu thời tiết thời gian thực từ các nguồn bên ngoài.</p>
+                            <h3 class="text-xl font-bold mb-3 text-white" data-lang-key="project4_title">Personal Apraisal</h3>
+                            <p class="text-gray-400 mb-4 text-sm flex-grow" data-lang-key="project4_desc">Xây dựng hệ thống đánh giá công việc, các hoạt động của từng nhân viên, lưu giữ lịch sử minh bạch để giảm thiên kiến,
+                            cập nhật tiến độ thường xuyên kịp thời các KC Performance của nhân viên</p>
                             <div class="mb-4 flex flex-wrap gap-2">
-                                <span class="bg-blue-900/50 text-blue-300 text-xs font-semibold px-2.5 py-1 rounded-full">Python</span>
-                                <span class="bg-green-900/50 text-green-300 text-xs font-semibold px-2.5 py-1 rounded-full">FastAPI</span>
-                                <span class="bg-blue-900/50 text-blue-300 text-xs font-semibold px-2.5 py-1 rounded-full">Docker</span>
+                                <span
+                                    class="bg-blue-900/50 text-blue-300 text-xs font-semibold px-2.5 py-1 rounded-full">React</span>
+                                <span
+                                    class="bg-green-900/50 text-green-300 text-xs font-semibold px-2.5 py-1 rounded-full">Material UI</span>
+                                <span
+                                    class="bg-blue-900/50 text-blue-300 text-xs font-semibold px-2.5 py-1 rounded-full">TypeScript</span>
                             </div>
-                            <div class="mt-auto">
-                                <a href="#" target="_blank" class="block text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors" data-lang-key="project_live_demo">Live Demo</a>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -210,22 +293,32 @@
 
         <!-- Contact Section -->
         <section id="contact" class="py-20 animate-on-scroll">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-lang-key="contact_title">Liên Hệ <span class="text-gradient">Với Tôi</span></h2>
-             <div class="max-w-2xl mx-auto card p-8 rounded-lg">
-                <p class="text-center text-gray-400 mb-6" data-lang-key="contact_subtitle">Nếu bạn có một dự án hoặc một cơ hội, đừng ngần ngại gửi tin nhắn cho tôi.</p>
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-lang-key="contact_title">Liên Hệ <span
+                    class="text-gradient">Với Tôi</span></h2>
+            <div class="max-w-2xl mx-auto card p-8 rounded-lg">
+                <p class="text-center text-gray-400 mb-6" data-lang-key="contact_subtitle">Nếu bạn có một dự án hoặc một
+                    cơ hội, đừng ngần ngại gửi tin nhắn cho tôi.</p>
                 <form id="contact-form">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                        <input type="text" id="name" name="from_name" class="bg-gray-800 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3" data-lang-key="form_name_placeholder" placeholder="Tên của bạn" required>
-                        <input type="email" id="email" name="from_email" class="bg-gray-800 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3" data-lang-key="form_email_placeholder" placeholder="Email của bạn" required>
+                        <input type="text" id="name" name="from_name"
+                            class="bg-gray-800 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
+                            data-lang-key="form_name_placeholder" placeholder="Tên của bạn" required>
+                        <input type="email" id="email" name="from_email"
+                            class="bg-gray-800 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
+                            data-lang-key="form_email_placeholder" placeholder="Email của bạn" required>
                     </div>
                     <div class="mb-6">
-                        <textarea id="message" name="message" rows="5" class="bg-gray-800 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3" data-lang-key="form_message_placeholder" placeholder="Nội dung tin nhắn..." required></textarea>
+                        <textarea id="message" name="message" rows="5"
+                            class="bg-gray-800 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
+                            data-lang-key="form_message_placeholder" placeholder="Nội dung tin nhắn..."
+                            required></textarea>
                     </div>
-                    <button type="submit" id="submit-btn" class="w-full text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:ring-4 focus:outline-none focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-3 text-center transition-all duration-300 disabled:opacity-75 disabled:cursor-wait">
+                    <button type="submit" id="submit-btn"
+                        class="w-full text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:ring-4 focus:outline-none focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-3 text-center transition-all duration-300 disabled:opacity-75 disabled:cursor-wait">
                         <span data-lang-key="form_submit_button">Gửi Tin Nhắn</span>
                     </button>
                 </form>
-                 <div id="form-message" class="mt-4 text-center"></div>
+                <div id="form-message" class="mt-4 text-center"></div>
             </div>
         </section>
 
@@ -235,12 +328,17 @@
     <footer class="border-t border-gray-800 mt-16 relative z-10">
         <div class="container mx-auto px-6 py-8 text-center text-gray-500">
             <div class="flex justify-center space-x-6 mb-6">
-                <a href="https://github.com/example" target="_blank" class="hover:text-white transition-colors"><i class="fab fa-github text-2xl"></i></a>
-                <a href="https://linkedin.com/in/example" target="_blank" class="hover:text-white transition-colors"><i class="fab fa-linkedin text-2xl"></i></a>
-                <a href="https://twitter.com/example" target="_blank" class="hover:text-white transition-colors"><i class="fab fa-twitter text-2xl"></i></a>
+                <a href="https://github.com/tanha1998" target="_blank" class="hover:text-white transition-colors"><i
+                        class="fab fa-github text-2xl"></i></a>
+                <a href="https://www.linkedin.com/in/hanguyen-software/" target="_blank"
+                    class="hover:text-white transition-colors"><i class="fab fa-linkedin text-2xl"></i></a>
+                <a href="https://www.facebook.com/js.software.vn/" target="_blank"
+                    class="hover:text-white transition-colors"><i class="fab fa-facebook text-2xl"></i></a>
             </div>
-            <p class="mt-6 text-xs">&copy; 2024 John Doe. <span data-lang-key="footer_rights">Mọi quyền được bảo lưu.</span></p>
+            <p class="mt-6 text-xs">&copy; 2025 Tan Ha <span data-lang-key="footer_rights">Mọi quyền được bảo
+                    lưu.</span></p>
         </div>
     </footer>
 </body>
+
 </html>

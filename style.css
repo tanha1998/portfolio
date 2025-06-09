@@ -91,3 +91,30 @@ body::before {
 .project-scroll-container::-webkit-scrollbar {
   display: none; /* Chrome, Safari and Opera */
 }
+
+/* Auto-focus portrait effect */
+.portrait-focus {
+  filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.5));
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.portrait-focus:hover {
+  filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.8));
+  transform: scale(1.05);
+}
+
+/* Optional: Add this for a subtle animation when the page loads */
+@keyframes focus-in {
+  0% {
+    filter: blur(4px) drop-shadow(0 0 0 rgba(59, 130, 246, 0));
+  }
+  100% {
+    filter: blur(0) drop-shadow(0 0 8px rgba(59, 130, 246, 0.5));
+  }
+}
+
+.portrait-focus {
+  animation: focus-in 1s ease-out forwards;
+}
