@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Web Level (iPhone)</title>
+<style>
+  :root{
+    --bg: #0f1724;
+    --card: #0b1220;
+    --accent: #10b981;
+    --muted: #97a0b3;
+  }
+  html,body{
+    height:100%;
+    margin:0;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: linear-gradient(180deg,#071028 0%, #051228 100%);
+    color: #e6eef8;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{
+    max-width:900px;margin:20px auto;padding:18px;
+  }
+  header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+  h1{font-size:18px;margin:0}
+  p.lead{margin:6px 0 0;color:var(--muted);font-size:13px}
+
+  .card{
+    background: rgba(255,255,255,0.02);
+    border-radius:12px;padding:14px;margin-bottom:14px;box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+  }
+
+  .controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+  button{
+    background:transparent;border:1px solid rgba(255,255,255,0.06);color:inherit;padding:8px 12px;border-radius:10px;font-size:14px;
+  }
+  button.primary{background:linear-gradient(90deg,#0ea5a4,#10b981);border:0;color:#042018}
+  .status{font-size:13px;color:var(--muted);margin-top:8px}
+
+  /* Level UI */
+  .levels{
+    display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:center;
+  }
+
+  .tube{
+    position:relative;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:14px;
+    padding:8px;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+  }
+
+  .tube.horizontal{
+    width:70vw; max-width:520px;
+    height:72px;
+  }
+  .tube.vertical{
+    width:72px;
+    height:50vh; max-height:520px;
+  }
+  /* track area */
+  .track{
+    position:relative;border-radius:10px;
+    width:calc(100% - 16px); height:calc(100% - 16px);
+    background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+    overflow:hidden;
+    box-sizing:border-box;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .bubble{
+    position:absolute;
+    width:48px;height:48px;border-radius:50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(255,255,255,0.88) 20%, rgba(255,255,255,0.65) 35%, rgba(16,185,129,0.06) 50%);
+    box-shadow: 0 6px 20px rgba(2,6,23,0.6);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;color:#0b1220;
+    transform: translate3d(0,0,0);
+    transition: box-shadow 120ms linear;
+    will-change: transform;
+    border:2px solid rgba(255,255,255,0.6);
+  }
+
+  /* center markers */
+  .center-cross{
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    width:2px; height:2px; background:rgba(255,255,255,0.6); border-radius:50%;
+    box-shadow:0 0 18px rgba(16,185,129,0.15);
+  }
+  .degrees{
+    text-align:center;margin-top:8px;font-size:14px;color:var(--muted)
+  }
+
+  .big{
+    margin-top:16px;text-align:center;
+    font-size:13px;color:var(--muted);
+  }
+
+  .hint{font-size:13px;color:var(--muted);margin-top:6px}
+  .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .badge{padding:6px 8px;border-radius:10px;background:rgba(255,255,255,0.02);font-size:13px}
+  .locked{box-shadow:inset 0 0 40px rgba(255,255,255,0.02)}
+  footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px}
+  @media (max-width:560px){
+    .tube.horizontal{height:64px}
+    .bubble{width:40px;height:40px}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Web Level — Measure (iPhone)</h1>
+        <p class="lead">Dùng DeviceOrientation để tạo tính năng level (horizontal / vertical / 2D). Hỗ trợ iOS permission.</p>
+      </div>
+      <div class="row">
+        <div class="badge" id="supportBadge">Checking…</div>
+      </div>
+    </header>
+
+    <div class="card">
+      <div class="controls">
+        <button id="btnRequest">Yêu cầu quyền cảm biến (iOS)</button>
+        <button id="btnCal">Calibrate (Zero)</button>
+        <button id="btnLock">Lock</button>
+        <button id="btn2D" class="primary">Toggle 2D view</button>
+      </div>
+      <div class="status" id="status">Trạng thái: Chưa có dữ liệu.</div>
+    </div>
+
+    <div class="card">
+      <div class="levels" id="levels">
+        <div class="tube horizontal" id="horTube" title="Horizontal level">
+          <div class="track" id="horTrack">
+            <div class="center-cross"></div>
+            <div class="bubble" id="horBubble">0°</div>
+          </div>
+        </div>
+
+        <div class="tube vertical" id="verTube" title="Vertical level">
+          <div class="track" id="verTrack">
+            <div class="center-cross"></div>
+            <div class="bubble" id="verBubble">0°</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="degrees" id="angles">Gamma: — , Beta: —</div>
+      <div class="big" id="bigInfo">2D mode: off</div>
+      <div class="hint">Mẹo: trên iOS, cần chạm nút "Yêu cầu quyền cảm biến" để bật cảm biến trong Safari.</div>
+    </div>
+
+    <footer>© Demo — thử trên iPhone Safari (HTTPS hoặc localhost)</footer>
+  </div>
+
+<script>
+/*
+  Web Level
+  - Uses deviceorientation (gamma: left-right, beta: front-back)
+  - Includes smoothing, calibration offset, lock, 2D mode
+  - iOS permission handling
+*/
+
+(() => {
+  const btnRequest = document.getElementById('btnRequest');
+  const btnCal = document.getElementById('btnCal');
+  const btnLock = document.getElementById('btnLock');
+  const btn2D = document.getElementById('btn2D');
+  const supportBadge = document.getElementById('supportBadge');
+
+  const status = document.getElementById('status');
+  const horBubble = document.getElementById('horBubble');
+  const verBubble = document.getElementById('verBubble');
+  const horTrack = document.getElementById('horTrack');
+  const verTrack = document.getElementById('verTrack');
+  const angles = document.getElementById('angles');
+  const bigInfo = document.getElementById('bigInfo');
+
+  let smoothing = 0.12; // 0..1 lower = smoother
+  let lastGamma = 0;
+  let lastBeta = 0;
+  let offsetGamma = 0;
+  let offsetBeta = 0;
+  let locked = false;
+  let mode2D = false;
+
+  function updateSupportBadge() {
+    const hasDO = typeof DeviceOrientationEvent !== 'undefined';
+    const needRequest = hasDO && typeof DeviceOrientationEvent.requestPermission === 'function';
+    supportBadge.textContent = hasDO ? (needRequest ? 'iOS permission required' : 'Device orientation OK') : 'Not supported';
+  }
+  updateSupportBadge();
+
+  // Permission flow for iOS Safari
+  async function requestPermissionFlow() {
+    if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+      try {
+        const res = await DeviceOrientationEvent.requestPermission();
+        if (res === 'granted') {
+          status.textContent = 'Quyền cảm biến được phép.';
+        } else {
+          status.textContent = 'Quyền cảm biến bị từ chối.';
+        }
+      } catch (e) {
+        status.textContent = 'Lỗi khi yêu cầu quyền: ' + e;
+      }
+    } else {
+      status.textContent = 'Trình duyệt không cần permission explicit (hoặc không hỗ trợ).';
+    }
+  }
+
+  btnRequest.addEventListener('click', () => {
+    requestPermissionFlow();
+  });
+
+  btnCal.addEventListener('click', () => {
+    offsetGamma = lastGamma;
+    offsetBeta = lastBeta;
+    status.textContent = `Đã calibrate. Offset lưu: γ=${offsetGamma.toFixed(1)}°, β=${offsetBeta.toFixed(1)}°`;
+  });
+
+  btnLock.addEventListener('click', () => {
+    locked = !locked;
+    btnLock.textContent = locked ? 'Unlock' : 'Lock';
+    btnLock.classList.toggle('locked', locked);
+    status.textContent = locked ? 'Đã khóa giá trị.' : 'Đã mở khóa.';
+  });
+
+  btn2D.addEventListener('click', () => {
+    mode2D = !mode2D;
+    btn2D.textContent = mode2D ? '2D mode ON' : 'Toggle 2D view';
+    bigInfo.textContent = `2D mode: ${mode2D ? 'on' : 'off'}`;
+  });
+
+  // clamp helper
+  function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
+
+  function handleOrientation(e) {
+    // gamma: left-right tilt (-90 .. 90)  — rotate around Y axis
+    // beta: front-back tilt (-180 .. 180) — rotate around X axis
+    let gamma = (e.gamma ?? 0); // left-right
+    let beta  = (e.beta  ?? 0); // front-back
+
+    // apply offset (calibration)
+    gamma = gamma - offsetGamma;
+    beta = beta - offsetBeta;
+
+    // small smoothing filter
+    lastGamma = lastGamma + (gamma - lastGamma) * smoothing;
+    lastBeta  = lastBeta  + (beta  - lastBeta ) * smoothing;
+
+    if (locked) {
+      // if locked, freeze values
+      // do nothing (keeps lastGamma/lastBeta as is)
+    } else {
+      // update UI bubble positions
+      placeBubbles(lastGamma, lastBeta);
+    }
+
+    angles.textContent = `Gamma: ${lastGamma.toFixed(1)}°, Beta: ${lastBeta.toFixed(1)}°`;
+    status.textContent = 'Đang nhận dữ liệu cảm biến.';
+  }
+
+  // place bubbles inside the track
+  function placeBubbles(gamma, beta) {
+    // horizontal tube: map gamma -> X position
+    const trackRect = horTrack.getBoundingClientRect();
+    const bubbleRect = horBubble.getBoundingClientRect();
+    const maxX = (trackRect.width - bubbleRect.width) / 2;
+    // gamma is -90..90 (left tilt negative, right positive)
+    const x = clamp((gamma / 90) * maxX, -maxX, maxX);
+
+    horBubble.style.transform = `translate3d(${x}px, 0, 0)`;
+    horBubble.textContent = `${gamma.toFixed(0)}°`;
+
+    // vertical tube: map beta -> Y position (beta  -180..180)
+    const vTrackRect = verTrack.getBoundingClientRect();
+    const vBubbleRect = verBubble.getBoundingClientRect();
+    const maxY = (vTrackRect.height - vBubbleRect.height) / 2;
+    // For vertical, we map beta (-90..90) to Y. We invert so that tilting top moves bubble up naturally.
+    const y = clamp(((-beta) / 90) * maxY, -maxY, maxY);
+    verBubble.style.transform = `translate3d(0, ${y}px, 0)`;
+    verBubble.textContent = `${beta.toFixed(0)}°`;
+
+    // 2D view: if enabled, show combined bubble in horizontal track center as offset in both axes.
+    if (mode2D) {
+      // We can also slightly rotate the horizontal bubble to show tilt direction
+      const tilt = Math.atan2(beta, gamma) * (180/Math.PI);
+      horBubble.style.boxShadow = '0 10px 30px rgba(2,6,23,0.6)';
+      horBubble.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${tilt}deg)`;
+    }
+  }
+
+  // attach listener with proper options
+  function startListening() {
+    if (typeof DeviceOrientationEvent === 'undefined') {
+      status.textContent = 'Thiết bị không hỗ trợ DeviceOrientation.';
+      return;
+    }
+    // use capture passive false so we can call preventDefault if needed (not necessary here)
+    window.addEventListener('deviceorientation', handleOrientation, true);
+    status.textContent = 'Đã lắng nghe deviceorientation.';
+  }
+
+  // Try to start immediately (may be blocked on iOS until permission)
+  startListening();
+
+  // user agent info for guidance
+  if (/iP(hone|ad|od)/.test(navigator.userAgent)) {
+    // iOS Safari needs permission starting iOS 13
+    const needRequest = typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function';
+    if (needRequest) {
+      status.textContent = 'iOS: hãy bấm "Yêu cầu quyền cảm biến" rồi chọn Allow trong popup.';
+    }
+  }
+
+  // helpful: show current window focus and resize to ensure sizes compute
+  window.addEventListener('resize', () => {
+    // recompute positions using last known angles
+    placeBubbles(lastGamma, lastBeta);
+  });
+
+  // if no events received in some time, notify user
+  let lastEventTime = Date.now();
+  window.addEventListener('deviceorientation', () => lastEventTime = Date.now());
+  setInterval(() => {
+    if (Date.now() - lastEventTime > 3000) {
+      // no recent events
+      // keep status unless we've got data before
+      if (status.textContent.includes('Đang nhận')) {
+        status.textContent = 'Chưa nhận dữ liệu cảm biến trong 3s — kiểm tra quyền hoặc trình duyệt.';
+      }
+    }
+  }, 1500);
+
+  // initial placement to center
+  placeBubbles(0,0);
+})();
+</script>
+</body>
+</html>
