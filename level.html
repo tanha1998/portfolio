@@ -2,341 +2,328 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Web Level (iPhone)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Level — HTML/CSS/JS</title>
 <style>
   :root{
-    --bg: #0f1724;
-    --card: #0b1220;
-    --accent: #10b981;
-    --muted: #97a0b3;
-  }
-  html,body{
-    height:100%;
-    margin:0;
-    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    background: linear-gradient(180deg,#071028 0%, #051228 100%);
-    color: #e6eef8;
-    -webkit-font-smoothing:antialiased;
-  }
-  .wrap{
-    max-width:900px;margin:20px auto;padding:18px;
-  }
-  header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-  h1{font-size:18px;margin:0}
-  p.lead{margin:6px 0 0;color:var(--muted);font-size:13px}
-
-  .card{
-    background: rgba(255,255,255,0.02);
-    border-radius:12px;padding:14px;margin-bottom:14px;box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+    --bg:#0f1115;
+    --ring:#1f2430;
+    --tick:#2f3644;
+    --text:#e8ecf3;
+    --accent:#6ee7b7;      /* xanh khi cân bằng */
+    --warn:#f59e0b;        /* vàng khi lệch vừa */
+    --danger:#ef4444;      /* đỏ khi lệch nhiều */
   }
 
-  .controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
-  button{
-    background:transparent;border:1px solid rgba(255,255,255,0.06);color:inherit;padding:8px 12px;border-radius:10px;font-size:14px;
-  }
-  button.primary{background:linear-gradient(90deg,#0ea5a4,#10b981);border:0;color:#042018}
-  .status{font-size:13px;color:var(--muted);margin-top:8px}
-
-  /* Level UI */
-  .levels{
-    display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:center;
+  html,body {height:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    display:flex; flex-direction:column; align-items:center; justify-content:space-between; gap:8px;
+    -webkit-user-select:none; user-select:none;
+    touch-action:manipulation;
   }
 
-  .tube{
-    position:relative;
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border-radius:14px;
-    padding:8px;
-    display:flex;align-items:center;justify-content:center;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+  header{
+    padding:14px 16px 0; width:100%; max-width:480px; box-sizing:border-box;
+    display:flex; justify-content:space-between; align-items:center; gap:8px;
+  }
+  .title { font-weight:600; letter-spacing:.2px; opacity:.9 }
+  .mode-chip{
+    font-size:12px; padding:6px 10px; border-radius:999px;
+    background:#1a1f29; border:1px solid #222836; opacity:.9
+  }
+  .container{
+    width:100%; max-width:480px; aspect-ratio:1/1; position:relative; margin:auto;
+    display:grid; place-items:center; padding:12px; box-sizing:border-box;
   }
 
-  .tube.horizontal{
-    width:70vw; max-width:520px;
-    height:72px;
+  /* Vòng chính */
+  .dial{
+    width:100%; height:100%; border-radius:50%;
+    background:radial-gradient(120% 120% at 50% 50%, #151922 0%, #0e1118 60%, #0c0f15 100%);
+    position:relative; box-shadow: inset 0 0 0 1px #1c2230, inset 0 0 40px rgba(0,0,0,.35);
   }
-  .tube.vertical{
-    width:72px;
-    height:50vh; max-height:520px;
+  /* Vạch độ */
+  .dial::before, .dial::after{
+    content:""; position:absolute; inset:10%; border-radius:50%;
+    box-shadow:
+      0 -35% 0 -31% var(--tick),
+      0  35% 0 -31% var(--tick),
+      35% 0 0 -31% var(--tick),
+      -35% 0 0 -31% var(--tick);
   }
-  /* track area */
-  .track{
-    position:relative;border-radius:10px;
-    width:calc(100% - 16px); height:calc(100% - 16px);
-    background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
-    overflow:hidden;
-    box-sizing:border-box;
-    display:flex;align-items:center;justify-content:center;
+  .ring{
+    position:absolute; inset:6%; border-radius:50%;
+    border:2px solid var(--ring);
+  }
+
+  /* Bong bóng */
+  .bubble-wrap{
+    position:absolute; inset:22%; border-radius:50%; pointer-events:none;
   }
   .bubble{
-    position:absolute;
-    width:48px;height:48px;border-radius:50%;
-    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(255,255,255,0.88) 20%, rgba(255,255,255,0.65) 35%, rgba(16,185,129,0.06) 50%);
-    box-shadow: 0 6px 20px rgba(2,6,23,0.6);
-    display:flex;align-items:center;justify-content:center;
-    font-weight:700;color:#0b1220;
-    transform: translate3d(0,0,0);
-    transition: box-shadow 120ms linear;
-    will-change: transform;
-    border:2px solid rgba(255,255,255,0.6);
+    --shadow: rgba(0,0,0,.55);
+    position:absolute; left:50%; top:50%; transform:translate(-50%, -50%);
+    width:28%; height:28%; border-radius:50%;
+    background: radial-gradient(120% 120% at 30% 30%, rgba(255,255,255,.45), rgba(255,255,255,.12) 35%, rgba(255,255,255,.08) 55%, rgba(255,255,255,0) 70%),
+                radial-gradient(100% 100% at 70% 70%, rgba(110,231,183,.35), rgba(110,231,183,.05) 60%, rgba(110,231,183,0) 75%);
+    box-shadow:
+      inset 0 2px 8px rgba(255,255,255,.25),
+      0 8px 18px var(--shadow), 0 2px 8px var(--shadow);
+    border:1px solid rgba(255,255,255,.12);
+    transition: box-shadow .15s ease;
   }
 
-  /* center markers */
-  .center-cross{
-    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
-    width:2px; height:2px; background:rgba(255,255,255,0.6); border-radius:50%;
-    box-shadow:0 0 18px rgba(16,185,129,0.15);
-  }
-  .degrees{
-    text-align:center;margin-top:8px;font-size:14px;color:var(--muted)
+  /* Thanh dọc khi ở chế độ Vertical (dựng đứng) */
+  .vertical-guide{
+    position:absolute; left:50%; top:8%; bottom:8%; width:3px; transform:translateX(-50%);
+    background:linear-gradient(to bottom, #273041, #1b2230);
+    border-radius:2px; opacity:.7; display:none;
   }
 
-  .big{
-    margin-top:16px;text-align:center;
-    font-size:13px;color:var(--muted);
+  /* HUD */
+  .hud{
+    position:absolute; bottom:18px; left:50%; transform:translateX(-50%);
+    display:flex; gap:10px; align-items:center; font-variant-numeric: tabular-nums;
+    background:#121722; border:1px solid #22283a; border-radius:12px; padding:8px 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,.35);
+  }
+  .deg{ font-size:20px; font-weight:600 }
+  .axis{ font-size:12px; opacity:.8 }
+  .dot{ width:6px; height:6px; border-radius:50%; background:#344055 }
+
+  /* Controls */
+  .controls{
+    width:100%; max-width:480px; box-sizing:border-box; padding:0 16px 20px;
+    display:flex; gap:10px; justify-content:space-between; align-items:center;
+  }
+  button{
+    appearance:none; border:none; cursor:pointer; color:var(--text); font-weight:600;
+    background:#1b2230; border:1px solid #222a3a; padding:12px 14px; border-radius:12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,.25);
+  }
+  button:active{ transform:translateY(1px) }
+  .primary{ background:#0f1729; border-color:#223049 }
+  .ghost{ background:#161c28 }
+
+  .notice{
+    font-size:13px; opacity:.8; line-height:1.35; padding:0 16px 12px; max-width:520px; text-align:center;
   }
 
-  .hint{font-size:13px;color:var(--muted);margin-top:6px}
-  .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-  .badge{padding:6px 8px;border-radius:10px;background:rgba(255,255,255,0.02);font-size:13px}
-  .locked{box-shadow:inset 0 0 40px rgba(255,255,255,0.02)}
-  footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px}
-  @media (max-width:560px){
-    .tube.horizontal{height:64px}
-    .bubble{width:40px;height:40px}
+  /* Adaptive colors */
+  .ok { outline:2px solid var(--accent); outline-offset:-2px }
+  .warn { outline:2px solid var(--warn); outline-offset:-2px }
+  .bad { outline:2px solid var(--danger); outline-offset:-2px }
+
+  @media (max-width:360px){
+    .bubble{ width:32%; height:32% }
+    .hud{ bottom:14px }
   }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div>
-        <h1>Web Level — Measure (iPhone)</h1>
-        <p class="lead">Dùng DeviceOrientation để tạo tính năng level (horizontal / vertical / 2D). Hỗ trợ iOS permission.</p>
-      </div>
-      <div class="row">
-        <div class="badge" id="supportBadge">Checking…</div>
-      </div>
-    </header>
+  <header>
+    <div class="title">Level</div>
+    <div class="mode-chip" id="modeChip">Mode: Detecting…</div>
+  </header>
 
-    <div class="card">
-      <div class="controls">
-        <button id="btnRequest">Yêu cầu quyền cảm biến (iOS)</button>
-        <button id="btnCal">Calibrate (Zero)</button>
-        <button id="btnLock">Lock</button>
-        <button id="btn2D" class="primary">Toggle 2D view</button>
+  <main class="container">
+    <div class="dial" id="dial">
+      <div class="ring"></div>
+      <div class="vertical-guide" id="vGuide"></div>
+      <div class="bubble-wrap" id="bubbleWrap">
+        <div class="bubble" id="bubble"></div>
       </div>
-      <div class="status" id="status">Trạng thái: Chưa có dữ liệu.</div>
+      <div class="hud" id="hud">
+        <div class="deg" id="degReadout">0.0°</div>
+        <div class="dot"></div>
+        <div class="axis" id="axisReadout">X: 0.0° · Y: 0.0°</div>
+      </div>
     </div>
+  </main>
 
-    <div class="card">
-      <div class="levels" id="levels">
-        <div class="tube horizontal" id="horTube" title="Horizontal level">
-          <div class="track" id="horTrack">
-            <div class="center-cross"></div>
-            <div class="bubble" id="horBubble">0°</div>
-          </div>
-        </div>
-
-        <div class="tube vertical" id="verTube" title="Vertical level">
-          <div class="track" id="verTrack">
-            <div class="center-cross"></div>
-            <div class="bubble" id="verBubble">0°</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="degrees" id="angles">Gamma: — , Beta: —</div>
-      <div class="big" id="bigInfo">2D mode: off</div>
-      <div class="hint">Mẹo: trên iOS, cần chạm nút "Yêu cầu quyền cảm biến" để bật cảm biến trong Safari.</div>
-    </div>
-
-    <footer>© Demo — thử trên iPhone Safari (HTTPS hoặc localhost)</footer>
+  <div class="controls">
+    <button class="primary" id="btnStart">Bắt đầu / Cấp quyền</button>
+    <button class="ghost" id="btnZero">Zero (Hiệu chuẩn)</button>
+    <button class="ghost" id="btnReset">Reset</button>
   </div>
+  <p class="notice">
+    Mẹo: đặt máy <b>nằm ngửa</b> để đo mặt phẳng (Surface) hoặc <b>dựng đứng</b> để đo tường/thanh (Vertical).
+    Ở iOS bạn cần chạm “Bắt đầu / Cấp quyền” và chạy qua HTTPS.
+  </p>
 
 <script>
-/*
-  Web Level
-  - Uses deviceorientation (gamma: left-right, beta: front-back)
-  - Includes smoothing, calibration offset, lock, 2D mode
-  - iOS permission handling
-*/
+(function(){
+  const btnStart = document.getElementById('btnStart');
+  const btnZero  = document.getElementById('btnZero');
+  const btnReset = document.getElementById('btnReset');
+  const bubble   = document.getElementById('bubble');
+  const bubbleWrap = document.getElementById('bubbleWrap');
+  const dial     = document.getElementById('dial');
+  const modeChip = document.getElementById('modeChip');
+  const degReadout = document.getElementById('degReadout');
+  const axisReadout = document.getElementById('axisReadout');
+  const vGuide   = document.getElementById('vGuide');
 
-(() => {
-  const btnRequest = document.getElementById('btnRequest');
-  const btnCal = document.getElementById('btnCal');
-  const btnLock = document.getElementById('btnLock');
-  const btn2D = document.getElementById('btn2D');
-  const supportBadge = document.getElementById('supportBadge');
+  const LEVEL_OK = 0.3;     // trong khoảng ±0.3°
+  const LEVEL_WARN = 1.0;   // ±1°
+  const MAX_DEG_FOR_MOVE = 8; // map tối đa 8° ra biên bong bóng
 
-  const status = document.getElementById('status');
-  const horBubble = document.getElementById('horBubble');
-  const verBubble = document.getElementById('verBubble');
-  const horTrack = document.getElementById('horTrack');
-  const verTrack = document.getElementById('verTrack');
-  const angles = document.getElementById('angles');
-  const bigInfo = document.getElementById('bigInfo');
+  let hasStarted = false;
+  let offsets = { beta: 0, gamma: 0 }; // hiệu chuẩn
+  let lastMode = null; // "surface" | "vertical"
+  let lastBuzz = 0;
 
-  let smoothing = 0.12; // 0..1 lower = smoother
-  let lastGamma = 0;
-  let lastBeta = 0;
-  let offsetGamma = 0;
-  let offsetBeta = 0;
-  let locked = false;
-  let mode2D = false;
+  function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
+  function lerp(a,b,t){ return a + (b-a)*t; }
+  function now(){ return performance.now(); }
 
-  function updateSupportBadge() {
-    const hasDO = typeof DeviceOrientationEvent !== 'undefined';
-    const needRequest = hasDO && typeof DeviceOrientationEvent.requestPermission === 'function';
-    supportBadge.textContent = hasDO ? (needRequest ? 'iOS permission required' : 'Device orientation OK') : 'Not supported';
+  function setMode(mode){
+    if(mode === lastMode) return;
+    lastMode = mode;
+    modeChip.textContent = `Mode: ${mode === 'surface' ? 'Surface' : 'Vertical'}`;
+    vGuide.style.display = (mode === 'vertical') ? 'block' : 'none';
   }
-  updateSupportBadge();
 
-  // Permission flow for iOS Safari
-  async function requestPermissionFlow() {
-    if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
-      try {
+  function colorByError(err){
+    if(err <= LEVEL_OK) return 'ok';
+    if(err <= LEVEL_WARN) return 'warn';
+    return 'bad';
+  }
+
+  function updateOutline(err){
+    dial.classList.remove('ok', 'warn', 'bad');
+    dial.classList.add(colorByError(err));
+  }
+
+  function haptic(){
+    try{
+      if(navigator.vibrate) navigator.vibrate(8);
+    }catch(e){}
+  }
+
+  function beep(){
+    try{
+      const ctx = new (window.AudioContext||window.webkitAudioContext)();
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type='sine'; o.frequency.value=880;
+      o.connect(g); g.connect(ctx.destination);
+      g.gain.setValueAtTime(0.001, ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.05, ctx.currentTime+0.005);
+      g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.06);
+      o.start(); o.stop(ctx.currentTime+0.08);
+      setTimeout(()=>ctx.close(),120);
+    }catch(e){}
+  }
+
+  function mapToBubble(xDeg, yDeg){
+    // Map ±MAX_DEG_FOR_MOVE° -> ±40% của wrap
+    const wrapRect = bubbleWrap.getBoundingClientRect();
+    const radius = wrapRect.width/2;
+    const maxPx = radius * 0.85;
+
+    const x = clamp((xDeg / MAX_DEG_FOR_MOVE) * maxPx, -maxPx, maxPx);
+    const y = clamp((yDeg / MAX_DEG_FOR_MOVE) * maxPx, -maxPx, maxPx);
+
+    bubble.style.left = `calc(50% + ${x}px)`;
+    bubble.style.top  = `calc(50% + ${y}px)`;
+  }
+
+  function pretty(n){ return (Math.round(n*10)/10).toFixed(1); }
+
+  function handleOrientation(e){
+    // iOS Safari: alpha(0-360), beta(-180..180), gamma(-90..90).
+    // Ta chỉ cần beta (pitch) & gamma (roll).
+    let beta = e.beta ?? 0;   // X tilt (trước-sau)
+    let gamma= e.gamma ?? 0;  // Y tilt (trái-phải)
+
+    // Trừ offsets để có "Zero"
+    beta -= offsets.beta;
+    gamma-= offsets.gamma;
+
+    // Phát hiện mode:
+    // Khi máy nằm ngửa: |beta| ~ 0; khi dựng đứng: |beta| ~ 90
+    const mode = (Math.abs(Math.abs(e.beta) - 90) < 15) ? 'vertical' : 'surface';
+    setMode(mode);
+
+    // Tính sai số và hiển thị:
+    if(mode === 'surface'){
+      // 0° khi beta≈0, gamma≈0
+      const err = Math.hypot(beta, gamma);
+      updateOutline(Math.abs(err));
+      mapToBubble(gamma, beta); // đảo trục để cảm giác tự nhiên
+      degReadout.textContent = `${pretty(err)}°`;
+      axisReadout.textContent = `X: ${pretty(beta)}° · Y: ${pretty(gamma)}°`;
+
+      if(err <= LEVEL_OK && now()-lastBuzz>750){
+        lastBuzz = now(); haptic(); beep();
+      }
+    }else{
+      // Vertical: mong muốn beta≈±90, gamma≈0.
+      // Chuyển về sai số so với 90° cho beta và 0° cho gamma.
+      const betaErr = Math.abs(90 - Math.abs(e.beta - offsets.beta)); // dùng e.beta gốc cho logic 90°
+      const roll = gamma;
+      const err = Math.hypot(betaErr, roll);
+
+      updateOutline(err);
+      // Trong vertical, di chuyển bong bóng chủ yếu theo gamma (trái-phải),
+      // còn betaErr biểu diễn theo trục Y để người dùng thấy cần ngửa/úp thêm.
+      mapToBubble(roll, (betaErr * (roll>=0?1:1)) * (roll>=0?1:1) ); // đơn giản hóa
+
+      degReadout.textContent = `${pretty(err)}°`;
+      axisReadout.textContent = `β→90°: ${pretty(betaErr)}° · γ: ${pretty(roll)}°`;
+
+      if(err <= LEVEL_OK && now()-lastBuzz>750){
+        lastBuzz = now(); haptic(); beep();
+      }
+    }
+  }
+
+  async function start(){
+    if(hasStarted) return;
+    // iOS 13+: cần xin quyền
+    try{
+      if(typeof DeviceOrientationEvent !== 'undefined' &&
+         typeof DeviceOrientationEvent.requestPermission === 'function'){
         const res = await DeviceOrientationEvent.requestPermission();
-        if (res === 'granted') {
-          status.textContent = 'Quyền cảm biến được phép.';
-        } else {
-          status.textContent = 'Quyền cảm biến bị từ chối.';
-        }
-      } catch (e) {
-        status.textContent = 'Lỗi khi yêu cầu quyền: ' + e;
+        if(res !== 'granted') { alert('Bạn cần cấp quyền “Motion & Orientation”.'); return; }
       }
-    } else {
-      status.textContent = 'Trình duyệt không cần permission explicit (hoặc không hỗ trợ).';
-    }
-  }
+    }catch(e){ /* ignore */ }
 
-  btnRequest.addEventListener('click', () => {
-    requestPermissionFlow();
-  });
-
-  btnCal.addEventListener('click', () => {
-    offsetGamma = lastGamma;
-    offsetBeta = lastBeta;
-    status.textContent = `Đã calibrate. Offset lưu: γ=${offsetGamma.toFixed(1)}°, β=${offsetBeta.toFixed(1)}°`;
-  });
-
-  btnLock.addEventListener('click', () => {
-    locked = !locked;
-    btnLock.textContent = locked ? 'Unlock' : 'Lock';
-    btnLock.classList.toggle('locked', locked);
-    status.textContent = locked ? 'Đã khóa giá trị.' : 'Đã mở khóa.';
-  });
-
-  btn2D.addEventListener('click', () => {
-    mode2D = !mode2D;
-    btn2D.textContent = mode2D ? '2D mode ON' : 'Toggle 2D view';
-    bigInfo.textContent = `2D mode: ${mode2D ? 'on' : 'off'}`;
-  });
-
-  // clamp helper
-  function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
-
-  function handleOrientation(e) {
-    // gamma: left-right tilt (-90 .. 90)  — rotate around Y axis
-    // beta: front-back tilt (-180 .. 180) — rotate around X axis
-    let gamma = (e.gamma ?? 0); // left-right
-    let beta  = (e.beta  ?? 0); // front-back
-
-    // apply offset (calibration)
-    gamma = gamma - offsetGamma;
-    beta = beta - offsetBeta;
-
-    // small smoothing filter
-    lastGamma = lastGamma + (gamma - lastGamma) * smoothing;
-    lastBeta  = lastBeta  + (beta  - lastBeta ) * smoothing;
-
-    if (locked) {
-      // if locked, freeze values
-      // do nothing (keeps lastGamma/lastBeta as is)
-    } else {
-      // update UI bubble positions
-      placeBubbles(lastGamma, lastBeta);
-    }
-
-    angles.textContent = `Gamma: ${lastGamma.toFixed(1)}°, Beta: ${lastBeta.toFixed(1)}°`;
-    status.textContent = 'Đang nhận dữ liệu cảm biến.';
-  }
-
-  // place bubbles inside the track
-  function placeBubbles(gamma, beta) {
-    // horizontal tube: map gamma -> X position
-    const trackRect = horTrack.getBoundingClientRect();
-    const bubbleRect = horBubble.getBoundingClientRect();
-    const maxX = (trackRect.width - bubbleRect.width) / 2;
-    // gamma is -90..90 (left tilt negative, right positive)
-    const x = clamp((gamma / 90) * maxX, -maxX, maxX);
-
-    horBubble.style.transform = `translate3d(${x}px, 0, 0)`;
-    horBubble.textContent = `${gamma.toFixed(0)}°`;
-
-    // vertical tube: map beta -> Y position (beta  -180..180)
-    const vTrackRect = verTrack.getBoundingClientRect();
-    const vBubbleRect = verBubble.getBoundingClientRect();
-    const maxY = (vTrackRect.height - vBubbleRect.height) / 2;
-    // For vertical, we map beta (-90..90) to Y. We invert so that tilting top moves bubble up naturally.
-    const y = clamp(((-beta) / 90) * maxY, -maxY, maxY);
-    verBubble.style.transform = `translate3d(0, ${y}px, 0)`;
-    verBubble.textContent = `${beta.toFixed(0)}°`;
-
-    // 2D view: if enabled, show combined bubble in horizontal track center as offset in both axes.
-    if (mode2D) {
-      // We can also slightly rotate the horizontal bubble to show tilt direction
-      const tilt = Math.atan2(beta, gamma) * (180/Math.PI);
-      horBubble.style.boxShadow = '0 10px 30px rgba(2,6,23,0.6)';
-      horBubble.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${tilt}deg)`;
-    }
-  }
-
-  // attach listener with proper options
-  function startListening() {
-    if (typeof DeviceOrientationEvent === 'undefined') {
-      status.textContent = 'Thiết bị không hỗ trợ DeviceOrientation.';
-      return;
-    }
-    // use capture passive false so we can call preventDefault if needed (not necessary here)
     window.addEventListener('deviceorientation', handleOrientation, true);
-    status.textContent = 'Đã lắng nghe deviceorientation.';
+    hasStarted = true;
+    modeChip.textContent = 'Mode: Detecting…';
+    btnStart.textContent = 'Đang nhận cảm biến…';
+    btnStart.disabled = true;
   }
 
-  // Try to start immediately (may be blocked on iOS until permission)
-  startListening();
+  btnStart.addEventListener('click', start);
 
-  // user agent info for guidance
-  if (/iP(hone|ad|od)/.test(navigator.userAgent)) {
-    // iOS Safari needs permission starting iOS 13
-    const needRequest = typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function';
-    if (needRequest) {
-      status.textContent = 'iOS: hãy bấm "Yêu cầu quyền cảm biến" rồi chọn Allow trong popup.';
+  btnZero.addEventListener('click', ()=>{
+    // Lấy snapshot nhanh từ sự kiện gần nhất (không có -> không làm gì)
+    // Trên iOS, chúng ta không có giá trị hiện tại ngoài event, nên hướng dẫn:
+    // Khi người dùng bấm Zero, ta tạm thời nghe 1 frame để lấy offset.
+    let got = false;
+    function once(e){
+      if(got) return;
+      got = true;
+      offsets.beta = e.beta ?? 0;
+      offsets.gamma= e.gamma ?? 0;
+      window.removeEventListener('deviceorientation', once, true);
+      // Hiển thị 0 ngay lập tức
+      degReadout.textContent = `0.0°`;
     }
-  }
-
-  // helpful: show current window focus and resize to ensure sizes compute
-  window.addEventListener('resize', () => {
-    // recompute positions using last known angles
-    placeBubbles(lastGamma, lastBeta);
+    window.addEventListener('deviceorientation', once, true);
   });
 
-  // if no events received in some time, notify user
-  let lastEventTime = Date.now();
-  window.addEventListener('deviceorientation', () => lastEventTime = Date.now());
-  setInterval(() => {
-    if (Date.now() - lastEventTime > 3000) {
-      // no recent events
-      // keep status unless we've got data before
-      if (status.textContent.includes('Đang nhận')) {
-        status.textContent = 'Chưa nhận dữ liệu cảm biến trong 3s — kiểm tra quyền hoặc trình duyệt.';
-      }
-    }
-  }, 1500);
+  btnReset.addEventListener('click', ()=>{
+    offsets = { beta:0, gamma:0 };
+  });
 
-  // initial placement to center
-  placeBubbles(0,0);
+  // Tự giảm chuyển động bong bóng (mượt hơn) — optional
+  // (Ở đây mapToBubble gọi trực tiếp; nếu muốn smoothing: wrap thêm tween.)
 })();
 </script>
 </body>
