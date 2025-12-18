@@ -331,7 +331,7 @@
             let status = "Healthy";
 
             if (capacity) {
-                healthBar.style.width = \`\${capacity}%\`;
+                healthBar.style.width = `${capacity}%`;
                 if (capacity < 80) {
                     healthColor = 'bg-red-500';
                     status = "Service Recommended";
@@ -342,8 +342,8 @@
                     healthColor = 'bg-green-500';
                     status = "Excellent Condition";
                 }
-                healthBar.className = \`h-2.5 rounded-full \${healthColor}\`;
-                healthText.innerText = \`\${status} (\${capacity}% Original Capacity)\`;
+                healthBar.className = `h-2.5 rounded-full ${healthColor}`;
+                healthText.innerText = `${status} (${capacity}% Original Capacity)`;
             } else {
                 healthBar.style.width = '0%';
                 healthText.innerText = "Capacity data missing";
@@ -362,7 +362,7 @@
             resultsModal.classList.add('opacity-0');
             resultsCard.classList.remove('scale-100');
             resultsCard.classList.add('scale-95');
-            
+
             setTimeout(() => {
                 resultsModal.classList.add('hidden');
                 // Reset file input
