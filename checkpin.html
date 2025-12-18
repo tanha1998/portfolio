@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CheckPin - iPhone Battery Analyer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        apple: {
+                            dark: '#1c1c1e',
+                            gray: '#2c2c2e',
+                            blue: '#0a84ff',
+                            text: '#f5f5f7'
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                        'slide-up': 'slideUp 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #000;
+            color: #f5f5f7;
+        }
+
+        .glass-panel {
+            background: rgba(44, 44, 46, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #0a84ff, #5e5ce6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .upload-zone.dragover {
+            border-color: #0a84ff;
+            background: rgba(10, 132, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col antialiased selection:bg-blue-500/30">
+
+    <!-- Navbar -->
+    <nav class="w-full glass-panel sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold tracking-tight">Check<span class="text-blue-500">Pin</span></h1>
+            <a href="https://github.com/tanha1998" target="_blank"
+                class="text-sm text-gray-400 hover:text-white transition-colors">By Tanha</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex flex-col items-center justify-center p-6 relative overflow-hidden">
+
+        <!-- Background Elements -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-[128px] pointer-events-none">
+        </div>
+        <div
+            class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-[128px] pointer-events-none">
+        </div>
+
+        <div class="max-w-2xl w-full space-y-8 z-10 animate-fade-in">
+
+            <!-- Header -->
+            <div class="text-center space-y-4">
+                <h2 class="text-5xl font-bold leading-tight">Reveal your iPhone's <br /><span class="gradient-text">True
+                        Battery Health</span></h2>
+                <p class="text-gray-400 text-lg max-w-lg mx-auto">Upload your analytics file to see real cycle counts,
+                    maximum capacity, and charging speeds masked by iOS.</p>
+            </div>
+
+            <!-- Upload Area -->
+            <div id="dropZone" class="upload-zone relative group cursor-pointer">
+                <input type="file" id="fileInput" class="hidden" accept=".txt,.ips,.json,.log">
+                <div
+                    class="glass-panel rounded-3xl p-12 border-2 border-dashed border-gray-700 transition-all duration-300 hover:border-blue-500/50 flex flex-col items-center justify-center text-center space-y-4">
+                    <div
+                        class="w-16 h-16 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-500 mb-2 group-hover:scale-110 transition-transform duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-xl font-medium text-white">Click to upload or drag & drop</p>
+                        <p class="text-sm text-gray-500 mt-2">Support for Analytics-*.ips or .txt files</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How to find info -->
+            <div class="glass-panel rounded-2xl p-6 text-sm text-gray-400 space-y-2">
+                <h3 class="text-white font-medium mb-2 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    How to get the file:
+                </h3>
+                <ol class="list-decimal list-inside space-y-1 ml-1 marker:text-blue-500">
+                    <li>Go to <span class="text-gray-300">Settings > Privacy & Security > Analytics & Improvements >
+                            Analytics Data</span></li>
+                    <li>Find a file named <span class="text-gray-300">Analytics-202X-XX-XX...</span> (Pick the latest
+                        date)</li>
+                    <li>Open it, tap Share icon at top right, and save to Files or share to your computer.</li>
+                </ol>
+            </div>
+
+            <!-- Demo Button -->
+            <div class="text-center">
+                <button id="demoBtn" class="text-xs text-gray-500 underline hover:text-blue-400 transition-colors">Run
+                    with simulated demo data</button>
+            </div>
+
+        </div>
+
+        <!-- Results Overlay (Hidden by default) -->
+        <div id="resultsModal"
+            class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
+            <div class="glass-panel rounded-3xl p-8 max-w-md w-full relative transform scale-95 transition-transform duration-300"
+                id="resultsCard">
+                <button onclick="closeResults()" class="absolute top-4 right-4 text-gray-500 hover:text-white p-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+
+                <div class="text-center mb-8">
+                    <div
+                        class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-500/20 text-green-500 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white">Analysis Complete</h3>
+                    <p class="text-gray-400 text-sm mt-1" id="fileDate">Data from recent analysis</p>
+                </div>
+
+                <div class="space-y-4">
+                    <!-- Cycle Count -->
+                    <div
+                        class="bg-gray-800/50 rounded-xl p-4 flex justify-between items-center border border-gray-700/50">
+                        <div>
+                            <p class="text-gray-400 text-xs uppercase tracking-wider font-semibold">Cycle Count</p>
+                            <p class="text-2xl font-bold text-white mt-1" id="cycleCountVal">--</p>
+                        </div>
+                        <div
+                            class="h-10 w-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Max Capacity -->
+                    <div
+                        class="bg-gray-800/50 rounded-xl p-4 flex justify-between items-center border border-gray-700/50">
+                        <div>
+                            <p class="text-gray-400 text-xs uppercase tracking-wider font-semibold">True Capacity</p>
+                            <p class="text-2xl font-bold text-white mt-1"><span id="capacityVal">--</span>%</p>
+                        </div>
+                        <div
+                            class="h-10 w-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Health Assessment -->
+                    <div class="bg-gray-800/50 rounded-xl p-4 border border-gray-700/50">
+                        <p class="text-gray-400 text-xs uppercase tracking-wider font-semibold mb-2">Health Status</p>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5 mb-2">
+                            <div id="healthBar" class="bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
+                        </div>
+                        <p class="text-sm text-gray-300" id="healthText">Waiting for data...</p>
+                    </div>
+                </div>
+
+                <div class="mt-8 text-center">
+                    <button onclick="closeResults()"
+                        class="bg-white text-black px-8 py-3 rounded-full font-semibold hover:bg-gray-200 transition-colors w-full">Analyze
+                        Another</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // DOM Elements
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const demoBtn = document.getElementById('demoBtn');
+        const resultsModal = document.getElementById('resultsModal');
+        const resultsCard = document.getElementById('resultsCard');
+
+        // Regex Patterns for iOS Analytics
+        // Supports various iOS versions format
+        const PATTERNS = {
+            cycleCount: /"last_value_CycleCount"\s*:\s*(\d+)/,
+            capacity: /"last_value_MaximumCapacityPercent"\s*:\s*(\d+)/,
+            // Fallbacks
+            cycleCountAlt: /"cycle_count"\s*:\s*(\d+)/,
+            capacityAlt: /"maximum_capacity_percent"\s*:\s*(\d+)/,
+            timestamp: /"timestamp"\s*:\s*"([^"]+)"/
+        };
+
+        // Event Listeners
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length) processFile(files[0]);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length) processFile(e.target.files[0]);
+        });
+
+        demoBtn.addEventListener('click', () => {
+            const demoData = JSON.stringify({
+                "last_value_CycleCount": 452,
+                "last_value_MaximumCapacityPercent": 89,
+                "timestamp": new Date().toISOString()
+            });
+            analyzeData(demoData, "Demo File");
+        });
+
+        function processFile(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                analyzeData(e.target.result, file.name);
+            };
+            reader.readAsText(file);
+        }
+
+        function analyzeData(text, filename) {
+            // Normalize
+            let cycles = null;
+            let capacity = null;
+
+            // Try primary patterns
+            let match = text.match(PATTERNS.cycleCount);
+            if (match) cycles = parseInt(match[1]);
+            else {
+                match = text.match(PATTERNS.cycleCountAlt);
+                if (match) cycles = parseInt(match[1]);
+            }
+
+            match = text.match(PATTERNS.capacity);
+            if (match) capacity = parseInt(match[1]);
+            else {
+                match = text.match(PATTERNS.capacityAlt);
+                if (match) capacity = parseInt(match[1]);
+            }
+
+            // Show results
+            if (cycles !== null || capacity !== null) {
+                showResults(cycles, capacity);
+            } else {
+                alert("Could not find battery data in this file. Make sure it is an 'Analytics-...' file, not 'Analytics-90day...' or others.");
+            }
+        }
+
+        function showResults(cycles, capacity) {
+            const cycleEl = document.getElementById('cycleCountVal');
+            const capacityEl = document.getElementById('capacityVal');
+            const healthBar = document.getElementById('healthBar');
+            const healthText = document.getElementById('healthText');
+
+            // Update DOM
+            cycleEl.innerText = cycles !== null ? cycles : "N/A";
+            capacityEl.innerText = capacity !== null ? capacity : "N/A";
+
+            // Visual Logic
+            let healthColor = 'bg-blue-600';
+            let status = "Healthy";
+
+            if (capacity) {
+                healthBar.style.width = \`\${capacity}%\`;
+                if (capacity < 80) {
+                    healthColor = 'bg-red-500';
+                    status = "Service Recommended";
+                } else if (capacity < 90) {
+                    healthColor = 'bg-yellow-500';
+                    status = "Aging";
+                } else {
+                    healthColor = 'bg-green-500';
+                    status = "Excellent Condition";
+                }
+                healthBar.className = \`h-2.5 rounded-full \${healthColor}\`;
+                healthText.innerText = \`\${status} (\${capacity}% Original Capacity)\`;
+            } else {
+                healthBar.style.width = '0%';
+                healthText.innerText = "Capacity data missing";
+            }
+
+            // Show Modal
+            resultsModal.classList.remove('hidden');
+            // Trigger reflow for animation
+            void resultsModal.offsetWidth;
+            resultsModal.classList.remove('opacity-0');
+            resultsCard.classList.remove('scale-95');
+            resultsCard.classList.add('scale-100');
+        }
+
+        function closeResults() {
+            resultsModal.classList.add('opacity-0');
+            resultsCard.classList.remove('scale-100');
+            resultsCard.classList.add('scale-95');
+            
+            setTimeout(() => {
+                resultsModal.classList.add('hidden');
+                // Reset file input
+                fileInput.value = '';
+            }, 300);
+        }
+    </script>
+</body>
+
+</html>
